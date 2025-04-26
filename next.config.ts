@@ -9,7 +9,8 @@ const nextConfig: NextConfig = {
     },
     distDir: process.env.NEXT_PUBLIC_BUILD_DIR,
     trailingSlash: false,
-    publicRuntimeConfig: {}
+    publicRuntimeConfig: {},
+    reactStrictMode: false
 }
 
 export default nextConfig

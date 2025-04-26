@@ -2,17 +2,15 @@ import { BACKEND_ENDPOINT } from '@/api/api'
 import axios from 'axios'
 
 /**
- * post login user details
+ * get login user details
  *
- * @param {string} shibirId - Shibir id of the user.
- * @param {string} password - password of the user.
  * @returns {Promise<Object>} - returns an object containing the result or error.
  * @returns {Object} result - The data returned from the server on success.
  */
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const getLoginUser = async (formData: any) => {
+export const getAllNotifications = async () => {
     try {
-        const res = await axios.post(`${BACKEND_ENDPOINT}/auth/login`, formData)
+        const res = await axios.get(`${BACKEND_ENDPOINT}/notification`)
         return { result: res?.data }
     } catch (error) {
         throw error
