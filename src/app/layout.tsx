@@ -1,13 +1,20 @@
 // src/app/layout.tsx
 'use client'
-
 import './globals.css'
+import '@/styles/styles.scss'
+import 'primereact/resources/themes/saga-blue/theme.css'
+import 'primereact/resources/primereact.min.css'
+import 'primeicons/primeicons.css'
 import { ReactNode } from 'react'
 import { Provider } from 'react-redux'
 import { PersistGate } from 'redux-persist/integration/react'
 import { store, persistor } from '@/redux/store'
 import { Toaster } from 'react-hot-toast'
-import AppLoader from '@/components/common/AppLoader'
+import dynamic from 'next/dynamic'
+
+const AppLoader = dynamic(() => import('@/components/common/AppLoader'), {
+    ssr: false
+})
 
 export default function RootLayout({ children }: { children: ReactNode }) {
     // const user = useAppSelector((state) => state.user.user)

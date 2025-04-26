@@ -1,8 +1,6 @@
-// components/Footer.tsx
 'use client'
 
 import { usePathname } from 'next/navigation'
-import Link from 'next/link'
 import { Home, Lightbulb, Gamepad2, Image, User } from 'lucide-react'
 
 const navItems = [
@@ -21,9 +19,9 @@ export default function Footer() {
             {navItems.map(({ href, icon: Icon, label }) => {
                 const isActive = pathname === href
                 return (
-                    <Link key={href} href={href} aria-label={label}>
+                    <link key={href} href={href} aria-label={label}>
                         <Icon className={`w-6 h-6 transition-colors ${isActive ? 'text-primary-light' : 'text-primary-foreground'}`} />
-                    </Link>
+                    </link>
                 )
             })}
         </footer>

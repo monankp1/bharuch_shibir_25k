@@ -47,11 +47,7 @@ export default function LoginForm() {
 
         try {
             dispatch(setLoading(true))
-            const { result, error } = await getLoginUser(formData)
-            console.log('err',error)
-            // if (error) {
-            //     throw error
-            // }
+            const { result } = await getLoginUser(formData)
 
             dispatch(setUser(result?.data))
             console.log(result.data)
