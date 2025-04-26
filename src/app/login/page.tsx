@@ -1,23 +1,26 @@
-'use client';
+'use client'
 
-import { Container, CssBaseline } from '@mui/material';
-import LoginForm from '@/components/login/LoginForm';
+import AppLoader from '@/components/common/AppLoader'
+import LoginForm from '@/components/login/LoginForm'
+import { useAppSelector } from '@/redux/hooks/useAppSelector'
+import { useRouter } from 'next/navigation'
+import { useEffect } from 'react'
 
 export default function LoginPage() {
+    const token = useAppSelector((state) => state.user.user?.token)
+    const router = useRouter()
+
+    useEffect(() => {
+        if (token) {
+            router.push('/home')
+        } else {
+            router.push('/')
+        }
+    }, [token, router])
+
     return (
-        <Container
-            component="main"
-            maxWidth="xs"
-            sx={{
-                height: '100vh',
-                display: 'flex',
-                flexDirection: 'column',
-                justifyContent: 'center',
-                background: 'linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%)'
-            }}
-        >
-            <CssBaseline />
+        <div className="login-page">
             <LoginForm />
-        </Container>
-    );
+        </div>
+    )
 }
