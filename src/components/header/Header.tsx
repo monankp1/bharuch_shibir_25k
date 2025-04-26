@@ -1,6 +1,5 @@
 'use client'
 import { useState } from 'react'
-import Image from 'next/image'
 import { useAppSelector } from '@/redux/hooks/useAppSelector'
 
 const settings = ['Profile', 'Logout']
@@ -11,7 +10,7 @@ function Header() {
     return (
         <div className="flex items-center justify-between bg-primaryLight p-4 text-primary">
             <div className="bg-white p-1 border rounded-full">
-                <Image
+                <img
                     src={'https://upload.wikimedia.org/wikipedia/en/thumb/4/4a/Baps_logo.svg/800px-Baps_logo.svg.png'}
                     height={30}
                     width={30}

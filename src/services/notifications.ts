@@ -1,5 +1,5 @@
-import { BACKEND_ENDPOINT } from '@/api/api'
 import axios from 'axios'
+import apiURL from '@/constants/apiEndPoints'
 
 /**
  * get login user details
@@ -10,7 +10,7 @@ import axios from 'axios'
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const getAllNotifications = async () => {
     try {
-        const res = await axios.get(`${BACKEND_ENDPOINT}/notification`)
+        const res = await axios.get(`${apiURL.BACKEND_ENDPOINT}/notification`)
         return { result: res?.data }
     } catch (error) {
         throw error

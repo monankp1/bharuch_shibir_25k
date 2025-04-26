@@ -1,8 +1,8 @@
 import axios from 'axios'
-import BACKEND_ENDPOINT from '@/constants/apiEndPoints'
+import apiURL from '@/constants/apiEndPoints'
 
 const http = axios.create({
-    baseURL: BACKEND_ENDPOINT
+    baseURL: apiURL.BACKEND_ENDPOINT
 })
 
 http.interceptors.request.use((config) => {

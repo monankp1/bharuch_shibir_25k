@@ -1,6 +1,5 @@
 'use client'
 
-import AppLoader from '@/components/common/AppLoader'
 import LoginForm from '@/components/login/LoginForm'
 import { useAppSelector } from '@/redux/hooks/useAppSelector'
 import { useRouter } from 'next/navigation'

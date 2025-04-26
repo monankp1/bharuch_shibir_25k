@@ -1,4 +1,5 @@
-import { BACKEND_ENDPOINT } from '@/api/api'
+import apiURL from '@/constants/apiEndPoints'
+
 import axios from 'axios'
 
 /**
@@ -12,7 +13,7 @@ import axios from 'axios'
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const getLoginUser = async (formData: any) => {
     try {
-        const res = await axios.post(`${BACKEND_ENDPOINT}/auth/login`, formData)
+        const res = await axios.post(`${apiURL.BACKEND_ENDPOINT}/auth/login`, formData)
         return { result: res?.data }
     } catch (error) {
         throw error
