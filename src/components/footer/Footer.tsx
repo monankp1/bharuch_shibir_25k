@@ -2,6 +2,7 @@
 
 import { usePathname } from 'next/navigation'
 import { Home, Lightbulb, Gamepad2, Image, User } from 'lucide-react'
+import Link from 'next/link'
 
 const navItems = [
     { href: '/home', icon: Home, label: 'Home' },
@@ -15,13 +16,13 @@ export default function Footer() {
     const pathname = usePathname()
 
     return (
-        <footer className="fixed bottom-0 left-0 right-0 bg-primary rounded-t-2xl px-6 py-3 flex justify-between items-center z-50">
+        <footer className="fixed bottom-0 left-0 right-0 mt-2 bg-primary rounded-t-2xl px-6 py-3 flex justify-between items-center">
             {navItems.map(({ href, icon: Icon, label }) => {
                 const isActive = pathname === href
                 return (
-                    <link key={href} href={href} aria-label={label}>
+                    <Link key={href} href={href} aria-label={label}>
                         <Icon className={`w-6 h-6 transition-colors ${isActive ? 'text-primary-light' : 'text-primary-foreground'}`} />
-                    </link>
+                    </Link>
                 )
             })}
         </footer>

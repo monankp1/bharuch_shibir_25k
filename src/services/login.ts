@@ -1,3 +1,4 @@
+import http from '@/config/config'
 import apiURL from '@/constants/apiEndPoints'
 
 import axios from 'axios'
@@ -13,7 +14,7 @@ import axios from 'axios'
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const getLoginUser = async (formData: any) => {
     try {
-        const res = await axios.post(`${apiURL.BACKEND_ENDPOINT}/auth/login`, formData)
+        const res = await http.post(`${apiURL.BACKEND_ENDPOINT}/auth/login`, formData)
         return { result: res?.data }
     } catch (error) {
         throw error

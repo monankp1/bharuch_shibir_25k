@@ -11,6 +11,7 @@ import { PersistGate } from 'redux-persist/integration/react'
 import { store, persistor } from '@/redux/store'
 import { Toaster } from 'react-hot-toast'
 import dynamic from 'next/dynamic'
+import AuthGuard from './AuthGaurd'
 
 const AppLoader = dynamic(() => import('@/components/common/AppLoader'), {
     ssr: false
@@ -34,9 +35,10 @@ export default function RootLayout({ children }: { children: ReactNode }) {
                 <body>
                     <Toaster position="top-center" reverseOrder={false} />
                     <PersistGate loading={null} persistor={persistor}>
-                        <AppLoader />
-
-                        {children}
+                        <AuthGuard>
+                            <AppLoader />
+                            {children}
+                        </AuthGuard>
                     </PersistGate>
                 </body>
             </html>

@@ -1,12 +1,18 @@
 'use client'
-import { useState } from 'react'
 import { useAppSelector } from '@/redux/hooks/useAppSelector'
+import { useDispatch } from 'react-redux'
+import { LogOut } from 'lucide-react'
+import { clearUser } from '@/redux/slices/userSlice'
 
 const settings = ['Profile', 'Logout']
 
 function Header() {
-    const user = useAppSelector((state) => state.user.user.user)
+    const dispatch = useDispatch()
 
+    const user = useAppSelector((state) => state.user.user)
+    const handleLogout = () => {
+        dispatch(clearUser())
+    }
     return (
         <div className="flex items-center justify-between bg-primaryLight p-4 text-primary">
             <div className="bg-white p-1 border rounded-full">
@@ -19,11 +25,17 @@ function Header() {
             </div>
 
             <div className="text-primary flex flex-col items-center">
-                <div className="text-xl font-bold">{`Hello ${user.firstName}!`}</div>
-                <div className="text-xl font-bold">Jay Swaminarayan</div>
+                <div className="text-xl font-bold">Jai Swaminarayan</div>
+                <div className=" ">
+                    {user?.firstName} {user?.lastName}
+                </div>
             </div>
 
-            <div>Hii</div>
+            <div>
+                <button className="flex items-center gap-2 bg-primary text-white font-semibold py-2 px-4 rounded-xl" onClick={handleLogout}>
+                    <LogOut className="w-5 h-5" />
+                </button>
+            </div>
         </div>
     )
 }
