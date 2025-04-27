@@ -50,7 +50,7 @@ export default function LoginForm() {
             const { result } = await getLoginUser(formData)
 
             dispatch(setUser(result?.data))
-            console.log(result.data)
+            setTimeout(() => 3000)
             showSuccessToast('Successfully LoggedIn')
             setFormData({ shibirId: '', password: '' })
             setErrors({})
@@ -64,7 +64,7 @@ export default function LoginForm() {
     return (
         <div className="min-h-screen flex items-center justify-center bg-gradient-to-br bg-primaryLight px-4 py-8">
             <div className="w-full max-w-md bg-white rounded-3xl shadow-2xl p-6 sm:p-8 border border-gray-200">
-                <h2 className="text-center text-2xl sm:text-3xl font-bold text-accent mb-6">Welcome Back 👋</h2>
+                <h2 className="text-center text-2xl sm:text-3xl font-bold text-accent mb-6">Hello Yoddha 👋</h2>
 
                 <form onSubmit={handleSubmit} className="flex flex-col gap-5">
                     <div>

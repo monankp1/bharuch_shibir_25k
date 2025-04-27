@@ -5,14 +5,31 @@ const http = axios.create({
     baseURL: apiURL.BACKEND_ENDPOINT
 })
 
-http.interceptors.request.use((config) => {
-    const token = localStorage.getItem('token') || JSON.parse(localStorage.getItem('user') || '{}')?.token
-
-    if (token) {
-        config.headers.Authorization = `Bearer ${token}`
+export const getLocalStorage = (key = 'persist:root') => {
+    if (typeof window !== 'undefined') {
+        const localStorageStr = localStorage.getItem(key)
+        if (localStorageStr) {
+            return JSON.parse(localStorageStr)
+        }
     }
+    return null
+}
 
-    return config
+export const getUserToken = () => {
+    const storage = getLocalStorage()
+    if (storage && storage.user) {
+        const userObj = JSON.parse(storage.user)
+        return userObj?.user?.token || null
+    }
+    return null
+}
+
+http.interceptors.request.use((req) => {
+    const token = getUserToken()
+    if (token) {
+        req.headers.Authorization = `Bearer ${token}`
+    }
+    return req
 })
 
 export default http
