@@ -1,23 +1,13 @@
-'use client';
+'use client'
 
-import { Container, CssBaseline } from '@mui/material';
-import QuizSubmit from '@/components/quizSubmit/QuizSubmit';
+import QuizSubmit from '@/components/quizSubmit/QuizSubmit'
 
 export default function QuizSubmitPage() {
     return (
-        <Container
-            component="main"
-            maxWidth="xs"
-            sx={{
-                minHeight: '100vh',
-                display: 'flex',
-                flexDirection: 'column',
-                justifyContent: 'center',
-                background: 'linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%)'
-            }}
-        >
-            <CssBaseline />
-            <QuizSubmit />
-        </Container>
-    );
+        <div className="min-h-screen flex flex-col justify-center bg-gradient-to-br from-gray-50 to-blue-100">
+            <div className="container mx-auto px-4 max-w-xs">
+                <QuizSubmit />
+            </div>
+        </div>
+    )
 }
