@@ -1,13 +1,21 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-/** @type {import('tailwindcss').Config} */
+import type { Config } from 'tailwindcss'
 
-const tailwindClass = {
-    content: ['./src/**/*.{js,ts,jsx,tsx}'],
+const config: Config = {
+    content: [
+        './src/app/**/*.{js,ts,jsx,tsx}', // app directory
+        './src/components/**/*.{js,ts,jsx,tsx}' // components directory
+    ],
     theme: {
-        extend: {}
+        extend: {
+            colors: {
+                primary: '#1D6595',
+                primaryLight: '#CFECFF',
+                accent: '#FE7D1B',
+                accentLight: '#FEDEC9'
+            }
+        }
     },
-
     plugins: []
 }
 
-export default tailwindClass
+export default config
