@@ -1,25 +1,19 @@
 'use client'
 
-import LoginForm from '@/components/login/LoginForm'
+import { ReactNode } from 'react'
 import { useAppSelector } from '@/redux/hooks/useAppSelector'
 import { useRouter } from 'next/navigation'
 import { useEffect } from 'react'
 
-export default function LoginPage() {
+export default function PrivateLayout({ children }: { children: ReactNode }) {
     const token = useAppSelector((state) => state.user.user?.token)
     const router = useRouter()
 
     useEffect(() => {
-        if (token) {
-            router.push('/home')
-        } else {
-            router.push('/')
+        if (!token) {
+            router.push('/login')
         }
     }, [token, router])
 
-    return (
-        <div className="login-page">
-            <LoginForm />
-        </div>
-    )
+    return <>{children}</>
 }

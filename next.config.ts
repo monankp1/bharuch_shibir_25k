@@ -3,13 +3,10 @@ import type { NextConfig } from 'next'
 const nextConfig: NextConfig = {
     /* config options here */
     output: 'export',
-    basePath: process.env.NEXT_PUBLIC_BASE_PATH,
     images: {
-        unoptimized: true
+        unoptimized: true // Important line!
     },
-    distDir: process.env.NEXT_PUBLIC_BUILD_DIR,
-    trailingSlash: false,
-    publicRuntimeConfig: {}
+    reactStrictMode: false
 }
 
 export default nextConfig
