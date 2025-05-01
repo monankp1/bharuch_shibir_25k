@@ -1,52 +1,42 @@
 'use client';
 
-import { Modal, Box, Typography, IconButton, List, ListItem, ListItemText } from '@mui/material';
-import { Close } from '@mui/icons-material';
+import { Dialog } from 'primereact/dialog';
 
 interface ViewAnswerProps {
-    open: boolean;
-    onClose: () => void;
+    visible: boolean;
+    onHide: () => void;
     data: any;
 }
 
-export default function ViewAnswer({ open, onClose, data }: ViewAnswerProps) {
-    const modalStyle = {
-        position: 'absolute',
-        top: '50%',
-        left: '50%',
-        transform: 'translate(-50%, -50%)',
-        width: '90%',
-        maxWidth: 400,
-        maxHeight: '80vh',
-        bgcolor: 'background.paper',
-        boxShadow: 24,
-        p: 3,
-        borderRadius: 2,
-        overflowY: 'auto'
-    };
+export default function ViewAnswer({ visible, onHide, data }: ViewAnswerProps) {
+    const header = (
+        <div className="text-xl font-semibold text-blue-600">
+            {data.quizName} - Answers
+        </div>
+    );
 
     return (
-        <Modal open={open} onClose={onClose}>
-            <Box sx={modalStyle}>
-                <IconButton onClick={onClose} sx={{ position: 'absolute', top: 8, right: 8 }}>
-                    <Close />
-                </IconButton>
-
-                <Typography variant="h6" sx={{ mb: 2, color: '#1976d2' }}>
-                    {data.quizName} - Answers
-                </Typography>
-
-                <List>
+        <Dialog 
+            header={header} 
+            visible={visible} 
+            onHide={onHide}
+            className="w-11/12 max-w-md"
+            breakpoints={{'960px': '75vw', '640px': '90vw'}}
+            draggable={false}
+            style={{ maxHeight: '80vh' }}
+        >
+            <div className="mt-2 overflow-y-auto">
+                <ul className="divide-y divide-gray-200">
                     {data.answers.map((answer: any, index: number) => (
-                        <ListItem key={index}>
-                            <ListItemText
-                                primary={answer.question}
-                                secondary={`Correct Answer: ${answer.corrrectOption || answer.selectedOption}`}
-                            />
-                        </ListItem>
+                        <li key={index} className="py-3">
+                            <p className="font-medium">{answer.question}</p>
+                            <p className="text-sm text-gray-600">
+                                Correct Answer: {answer.corrrectOption || answer.selectedOption}
+                            </p>
+                        </li>
                     ))}
-                </List>
-            </Box>
-        </Modal>
+                </ul>
+            </div>
+        </Dialog>
     );
 }

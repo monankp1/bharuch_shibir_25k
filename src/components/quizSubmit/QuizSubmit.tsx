@@ -1,66 +1,49 @@
-'use client';
+'use client'
 
-import { useState } from 'react';
-import { Box, Paper, Typography, Button } from '@mui/material';
-import ViewScore from './ViewScore';
-import ViewAnswer from './ViewAnswer';
+import { useState } from 'react'
+import { Card } from 'primereact/card'
+import { Button } from 'primereact/button'
+import ViewScore from './ViewScore'
+import ViewAnswer from './ViewAnswer'
 
 export default function QuizSubmit() {
-    const [showScore, setShowScore] = useState(false);
-    const [showAnswers, setShowAnswers] = useState(false);
+    const [showScore, setShowScore] = useState(false)
+    const [showAnswers, setShowAnswers] = useState(false)
 
     // Sample data (would come from backend)
     const scoreData = {
         currentScore: 50,
         total: 100,
-        quiz: [{ quizId: 1, quizName: "Shreeji", score: 1, total: 4 }]
-    };
+        quiz: [{ quizId: 1, quizName: 'Shreeji', score: 1, total: 4 }]
+    }
 
     const answerData = {
         quizId: 1,
-        quizName: "Shreeji",
+        quizName: 'Shreeji',
         answers: [
-            { question: "What is your name?", corrrectOption: "Tarun" },
-            { question: "What is the capital of France?", selectedOption: "Paris" },
+            { question: 'What is your name?', corrrectOption: 'Tarun' },
+            { question: 'What is the capital of France?', selectedOption: 'Paris' }
             // ... other answers
         ]
-    };
+    }
 
     return (
-        <Paper elevation={3} sx={{ p: 3, borderRadius: 2 }}>
-            <Typography variant="h6" align="center" sx={{ mb: 2, color: '#1976d2' }}>
-                Your response has been submitted successfully
-            </Typography>
+        <Card className="shadow-lg p-4 rounded-lg">
+            <div className="text-center">
+                <h2 className="text-xl font-semibold text-blue-600 mb-4">Your response has been submitted successfully</h2>
 
-            <Button
-                fullWidth
-                variant="contained"
-                onClick={() => setShowAnswers(true)}
-                sx={{ mb: 2, py: 1.5, backgroundColor: '#1976d2' }}
-            >
-                View Answers
-            </Button>
+                <Button
+                    label="View Answers"
+                    className="w-full mb-3 p-3 bg-blue-600 hover:bg-blue-700"
+                    onClick={() => setShowAnswers(true)}
+                />
 
-            <Button
-                fullWidth
-                variant="contained"
-                onClick={() => setShowScore(true)}
-                sx={{ py: 1.5, backgroundColor: '#1976d2' }}
-            >
-                View Score
-            </Button>
+                <Button label="View Score" className="w-full p-3 bg-blue-600 hover:bg-blue-700" onClick={() => setShowScore(true)} />
+            </div>
 
-            <ViewAnswer
-                open={showAnswers}
-                onClose={() => setShowAnswers(false)}
-                data={answerData}
-            />
+            <ViewAnswer visible={showAnswers} onHide={() => setShowAnswers(false)} data={answerData} />
 
-            <ViewScore
-                open={showScore}
-                onClose={() => setShowScore(false)}
-                data={scoreData}
-            />
-        </Paper>
-    );
+            <ViewScore visible={showScore} onHide={() => setShowScore(false)} data={scoreData} />
+        </Card>
+    )
 }

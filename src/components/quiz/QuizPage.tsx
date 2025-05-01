@@ -1,34 +1,36 @@
-'use client';
+'use client'
 
-import { Box, Typography, Radio, RadioGroup, FormControlLabel } from '@mui/material';
+import { RadioButton } from 'primereact/radiobutton'
 
 interface QuizPageProps {
-    question: any;
-    onAnswer: (questionId: number, selectedOptionId: number) => void;
+    question: any
+    onAnswer: (questionId: number, selectedOptionId: number) => void
 }
 
 export default function QuizPage({ question, onAnswer }: QuizPageProps) {
-    const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        onAnswer(question.questionId, parseInt(event.target.value));
-    };
+    const handleChange = (optionId: number) => {
+        onAnswer(question.questionId, optionId)
+    }
 
     return (
-        <Box>
-            <Typography variant="h6" sx={{ mb: 2 }}>
-                {question.question}
-            </Typography>
+        <div className="p-4">
+            <h2 className="text-xl font-semibold mb-4">{question.question}</h2>
 
-            <RadioGroup onChange={handleChange}>
+            <div className="flex flex-col gap-3">
                 {question.options.map((option: any, index: number) => (
-                    <FormControlLabel
-                        key={option[`option${index + 1}Id`]}
-                        value={option[`option${index + 1}Id`]}
-                        control={<Radio />}
-                        label={option[`option${index + 1}`]}
-                        sx={{ mb: 1 }}
-                    />
+                    <div key={option[`option${index + 1}Id`]} className="flex items-center gap-2">
+                        <RadioButton
+                            inputId={`option${index + 1}`}
+                            name="quizOption"
+                            value={option[`option${index + 1}Id`]}
+                            onChange={() => handleChange(option[`option${index + 1}Id`])}
+                        />
+                        <label htmlFor={`option${index + 1}`} className="ml-2 cursor-pointer">
+                            {option[`option${index + 1}`]}
+                        </label>
+                    </div>
                 ))}
-            </RadioGroup>
-        </Box>
-    );
+            </div>
+        </div>
+    )
 }

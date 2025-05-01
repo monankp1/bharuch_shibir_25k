@@ -1,54 +1,46 @@
-'use client';
+'use client'
 
-import { Modal, Box, Typography, IconButton, List, ListItem, ListItemText } from '@mui/material';
-import { Close } from '@mui/icons-material';
+import { Dialog } from 'primereact/dialog'
+import { Button } from 'primereact/button'
 
 interface ViewScoreProps {
-    open: boolean;
-    onClose: () => void;
-    data: any;
+    visible: boolean
+    onHide: () => void
+    data: any
 }
 
-export default function ViewScore({ open, onClose, data }: ViewScoreProps) {
-    const modalStyle = {
-        position: 'absolute',
-        top: '50%',
-        left: '50%',
-        transform: 'translate(-50%, -50%)',
-        width: '90%',
-        maxWidth: 400,
-        bgcolor: 'background.paper',
-        boxShadow: 24,
-        p: 3,
-        borderRadius: 2
-    };
+export default function ViewScore({ visible, onHide, data }: ViewScoreProps) {
+    const header = (
+        <div className="flex justify-between items-center">
+            <span className="text-xl font-semibold text-blue-600">Quiz Score</span>
+        </div>
+    )
 
     return (
-        <Modal open={open} onClose={onClose}>
-            <Box sx={modalStyle}>
-                <IconButton onClick={onClose} sx={{ position: 'absolute', top: 8, right: 8 }}>
-                    <Close />
-                </IconButton>
-
-                <Typography variant="h6" sx={{ mb: 2, color: '#1976d2' }}>
-                    Quiz Score
-                </Typography>
-
-                <Typography sx={{ mb: 1 }}>
+        <Dialog
+            header={header}
+            visible={visible}
+            onHide={onHide}
+            className="w-11/12 max-w-md"
+            breakpoints={{ '960px': '75vw', '640px': '90vw' }}
+            draggable={false}
+        >
+            <div className="mt-2">
+                <p className="mb-4">
                     Overall Score: {data.currentScore}/{data.total}
-                </Typography>
+                </p>
 
-                <List>
+                <ul className="divide-y divide-gray-200">
                     {data.quiz.map((q: any) => (
-                        <ListItem key={q.quizId}>
-                            <ListItemText
-                                primary={q.quizName}
-                                secondary={`Score: ${q.score}/${q.total}`}
-                            />
-                        </ListItem>
+                        <li key={q.quizId} className="py-3">
+                            <p className="font-medium">{q.quizName}</p>
+                            <p className="text-sm text-gray-600">
+                                Score: {q.score}/{q.total}
+                            </p>
+                        </li>
                     ))}
-                </List>
-            </Box>
-        </Modal>
-    );
+                </ul>
+            </div>
+        </Dialog>
+    )
 }
