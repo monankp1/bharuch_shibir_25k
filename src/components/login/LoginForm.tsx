@@ -11,6 +11,8 @@ import { setUser } from '@/redux/slices/userSlice'
 import { useAppSelector } from '@/redux/hooks/useAppSelector'
 import { getLoginUser } from '@/services/login'
 import useToast from '@/utils/hooks/useToast'
+import Image from 'next/image'
+import logo from './../../../public/icons/logo.svg'
 
 export default function LoginForm() {
     const [formData, setFormData] = useState({ shibirId: '', password: '' })
@@ -29,8 +31,6 @@ export default function LoginForm() {
 
         if (!formData.shibirId) {
             newErrors.shibirId = 'Shibir Id is required'
-        } else if (!/^[A-Z]{4}\d{3}$/.test(formData.shibirId)) {
-            newErrors.shibirId = 'Incorrect Shibir ID'
         }
 
         if (!formData.password) {
@@ -62,7 +62,10 @@ export default function LoginForm() {
     }
 
     return (
-        <div className="min-h-screen flex items-center justify-center bg-gradient-to-br bg-primaryLight px-4 py-8">
+        <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br bg-primaryLight px-4 py-8">
+            <div>
+                <Image src={logo} alt="Logo" width={300} height={200} />
+            </div>
             <div className="w-full max-w-md bg-white rounded-3xl shadow-2xl p-6 sm:p-8 border border-gray-200">
                 <h2 className="text-center text-2xl sm:text-3xl font-bold text-accent mb-6">Hello Yoddha 👋</h2>
 
@@ -74,7 +77,6 @@ export default function LoginForm() {
                                 name="shibirId"
                                 value={formData.shibirId}
                                 onChange={handleChange}
-                                maxLength={7}
                                 className="w-full border rounded-lg border-gray-300"
                             />
                             <label htmlFor="shibirId">Shibir Id</label>

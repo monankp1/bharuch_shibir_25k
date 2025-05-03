@@ -1,7 +1,13 @@
+'use client'
 import Footer from '@/components/footer/Footer'
+import { useRouter } from 'next/navigation'
 import React from 'react'
 
 const Activity = () => {
+    const router = useRouter()
+    const handleQuizPage = () => {
+        router.push('/activity/quiz')
+    }
     const activityBox = (header: string) => {
         return (
             <div className="relative border border-primary rounded-lg p-6 w-full max-w-md ">
@@ -13,8 +19,8 @@ const Activity = () => {
         )
     }
     return (
-        <div className="flex flex-col justify-center items-center ">
-            <div> {activityBox('Quiz')}</div>
+        <div className="flex flex-col justify-center items-center mt-10">
+            <div onClick={handleQuizPage}> {activityBox('Quiz')}</div>
             <Footer />
         </div>
     )

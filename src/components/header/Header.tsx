@@ -3,6 +3,8 @@ import { useAppSelector } from '@/redux/hooks/useAppSelector'
 import { useDispatch } from 'react-redux'
 import { LogOut } from 'lucide-react'
 import { clearUser } from '@/redux/slices/userSlice'
+import logo from '../../../public/icons/logo.svg'
+import Image from 'next/image'
 
 const settings = ['Profile', 'Logout']
 
@@ -15,13 +17,8 @@ function Header() {
     }
     return (
         <div className="flex items-center justify-between bg-primaryLight p-4 text-primary">
-            <div className="bg-white p-1 border rounded-full">
-                <img
-                    src={'https://upload.wikimedia.org/wikipedia/en/thumb/4/4a/Baps_logo.svg/800px-Baps_logo.svg.png'}
-                    height={30}
-                    width={30}
-                    alt="Logo"
-                />
+            <div>
+                <Image src={logo} height={60} width={60} alt="Logo" className="rounded-full" />
             </div>
 
             <div className="text-primary flex flex-col items-center">
